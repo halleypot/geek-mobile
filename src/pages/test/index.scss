@@ -1,0 +1,22 @@
+@import '@/styles/hairline.scss';
+
+:root {
+  --geek-color-skyblue: skyblue;
+  --geek-border: 1px solid red;
+}
+
+.test {
+  .test-h2 {
+    color: var(--geek-color-skyblue);
+  }
+  .box1 {
+    position: relative;
+    height: 50px;
+    border: var(--geek-border);
+    @include hairline(all, green);
+  }
+  .box2 {
+    height: 50px;
+    border: var(--geek-border);
+  }
+}

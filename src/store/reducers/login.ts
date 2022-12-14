@@ -11,6 +11,11 @@ const loginReducer = (state = initState, actions: LoginAction): Token => {
   if (actions.type === 'login/token') {
     return actions.payload
   }
+
+  if (actions.type === 'login/logout') {
+    return state
+  }
+
   return state
 }
 

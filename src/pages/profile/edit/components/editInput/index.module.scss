@@ -1,0 +1,57 @@
+.root {
+  width: 373px;
+  height: 100%;
+  background-color: #f7f8fa;
+
+  :global {
+    .navbar {
+      background-color: transparent;
+    }
+
+    .commit-btn {
+      font-size: 17px;
+      font-weight: bolder;
+    }
+
+    .edit-input-content {
+      padding: 0 16px;
+
+      h3 {
+        padding: 15px 0;
+        font-size: 17px;
+        color: #333;
+      }
+
+      .input-wrap {
+        height: 300px;
+        padding-left: 16px;
+
+        background-color: #fff;
+
+        input {
+          height: 44px;
+          font-size: 14px;
+        }
+      }
+
+      .textarea {
+        --font-size: 14px;
+        height: 300px;
+        padding: 16px;
+        padding-bottom: 8px;
+        border-radius: 4px;
+        background-color: #fff;
+
+        .edit-input-content .input-wrap {
+          height: 300px;
+        }
+        .adm-text-area-element {
+          height: 300px;
+        }
+        .adm-text-area-count {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

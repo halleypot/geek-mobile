@@ -3,9 +3,10 @@ import store from '@/store'
 import { Toast } from 'antd-mobile'
 import { customHistory } from './history'
 import { clearToken, isAuth, setToken } from './auth'
-import type { LoginResponse, Token } from '@/types/data'
+import type { Token } from '@/types/data'
 
 const http = axios.create({
+  // set proxy pathname: /api
   baseURL: 'http://toutiao.itheima.net/v1_0',
   // baseURL: process.env.REACT_APP_URL
 })
@@ -69,15 +70,22 @@ http.interceptors.response.use(
           // if has token , then send refresh token
         } else {
           const { refresh_token } = store.getState().login
-          const res: LoginResponse = await http.put('/authorizations', null, {
-            headers: {
-              Authorization: `Bearer ${refresh_token}`,
-            },
-          })
+          console.log('refren token: ', refresh_token)
+
+          const res: any = await axios
+            .create()
+            .put('http://toutiao.itheima.net/v1_0/authorizations', null, {
+              headers: {
+                Authorization: `Bearer ${refresh_token}`,
+              },
+            })
+          console.log(res)
+
           const tokens: Token = {
-            token: res.data.token,
+            token: res.data.data.token,
             refresh_token,
           }
+
           // store new token in local storage
           setToken(tokens)
           // store tokens in redux

@@ -44,6 +44,62 @@ type ApiResponse<G> = {
   data: G
 }
 
+// channels data type
+type Channel = {
+  id: number //	必须		频道ID
+  name: string //	必须		频道名称
+}
+
+export type UserChannel = {
+  channels: Channel[]
+}
+
+export type ArticlesItem = {
+  art_id: string //	必须		文章id
+  title: string //	必须		文章标题
+  aut_id: string //	必须		作者id
+  aut_name: string //	必须		作者名称
+  comm_count: string //	必须		评论数量
+  pubdate: string //	必须		发布时间
+  cover: {
+    //	必须		封面
+    type: 0 | 1 | 3 //	必须		封面类型，0-无封面，1-1张封面图片，3-3张封面
+    images: string[] //	必须		封面图片
+  }
+}
+
+// artile data type
+export type Articles = {
+  pre_timestamp: number
+  results: ArticleItem[]
+}
+
+export type ArticleDetail = {
+  art_id: string //	必须		文章ID
+  title: string //	必须		文章标题
+  pubdate: string //	必须		发布日期
+  aut_id: string //	必须		作者id
+  aut_name: string //	必须		作者名
+  aut_photo: string //	必须		作者头像url 无图片，默认为null
+  is_followed: boolean //	必须		是否关注了作者
+  attitude: number //	必须		用户对文章的态度, -1: 无态度，0-不喜欢，1-点赞
+  content: string //	必须		文章内容
+  is_collected: boolean //	必须		是否收藏了文章
+}
+
+// search suggestion type
+export type SearchOption = {
+  options: string[]
+}
+
+export type SearchResults = {
+  page: number
+  per_page: number
+  total_count: number
+  results: Articles['results']
+}
+
+// axios reponse
 export type LoginResponse = ApiResponse<Token>
 
 export type UserResponse = ApiResponse<UserProfile>
@@ -51,3 +107,13 @@ export type UserResponse = ApiResponse<UserProfile>
 export type UserDetailsResponse = ApiResponse<UserDetails>
 
 export type UserPhotoResponse = ApiResponse<Photo>
+
+export type UserChannelResponse = ApiResponse<UserChannel>
+
+export type AriticlesResponse = ApiResponse<Articles>
+
+export type ArticleDetailResponse = ApiResponse<ArticleDetail>
+
+export type SearchOptionResponse = ApiResponse<SearchOption>
+
+export type SearchResultsResponse = ApiResponse<SearchResults>

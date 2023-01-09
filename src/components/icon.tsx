@@ -3,7 +3,7 @@ import classnames from 'classnames'
 type props = {
   type: string
   className?: string
-  handleClick?: () => void
+  handleClick?: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void
 }
 
 const Icon = ({ type, className, handleClick }: props) => {

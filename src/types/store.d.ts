@@ -1,10 +1,17 @@
 import store from '@/store'
 import { ThunkAction } from 'redux-thunk'
-import { EditUserDetails, Photo, Token, UserDetails, UserProfile } from './data'
+import {
+  Channel,
+  EditUserDetails,
+  Photo,
+  Token,
+  UserDetails,
+  UserProfile,
+} from './data'
 
 export type RootState = ReturnType<typeof store.getState>
 
-type RootAction = LoginAction | getUserAction
+type RootAction = LoginAction | getUserAction | homeAction
 
 export type RootThunkAction = ThunkAction<void, RootState, unknown, RootAction>
 
@@ -33,4 +40,26 @@ export type getUserAction =
   | {
       type: 'profile/updatePhoto'
       payload: string
+    }
+
+export type homeAction =
+  | {
+      type: 'home/getUserChannels'
+      payload: Channel[]
+    }
+  | {
+      type: 'home/getRestChannels'
+      payload: Channel[]
+    }
+  | {
+      type: 'home/changeTab'
+      payload: string
+    }
+  | {
+      type: 'home/delChannel'
+      payload: Channel
+    }
+  | {
+      type: 'home/addChannel'
+      payload: Channel
     }

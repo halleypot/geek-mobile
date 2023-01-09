@@ -1,6 +1,6 @@
 import style from './index.module.scss'
 import Icon from '@/components/icon'
-import { Toast, Button, Form, Input, TabBar, Dialog } from 'antd-mobile'
+import { Toast, Button, Form, Input, TabBar, Dialog, Tabs } from 'antd-mobile'
 import {
   AppOutline,
   MessageOutline,
@@ -31,10 +31,50 @@ const tabs = [
     icon: <UserOutline />,
   },
 ]
+// const arr = [
+//   { name: ['mobile'], errors: ['wrong number', 'wrong number'], warnings: [] },
+//   { name: ['code'], errors: [], warnings: [] },
+// ]
+
+// console.log(arr.filter((item) => item.errors.length === 0))
 
 const Test = () => {
   return (
     <div className={style.root}>
+      {/* Tabs栏 component */}
+      <Tabs
+        defaultActiveKey="vegetables"
+        stretch
+        onChange={(key) => console.log(key)}
+      >
+        <Tabs.Tab title="水果" key="fruits">
+          菠萝
+        </Tabs.Tab>
+        <Tabs.Tab title="蔬菜" key="vegetables">
+          西红柿
+        </Tabs.Tab>
+        <Tabs.Tab title="动物" key="animals">
+          蚂蚁
+        </Tabs.Tab>
+        <Tabs.Tab title="水果" key="fruits1">
+          菠萝
+        </Tabs.Tab>
+        <Tabs.Tab title="蔬菜" key="vegetables1">
+          西红柿
+        </Tabs.Tab>
+        <Tabs.Tab title="动物" key="animals1">
+          蚂蚁
+        </Tabs.Tab>
+        <Tabs.Tab title="水果" key="fruits2">
+          菠萝
+        </Tabs.Tab>
+        <Tabs.Tab title="蔬菜" key="vegetables2">
+          西红柿
+        </Tabs.Tab>
+        <Tabs.Tab title="动物" key="animals2">
+          蚂蚁
+        </Tabs.Tab>
+      </Tabs>
       <Button
         block
         onClick={() => {

@@ -4,7 +4,7 @@ import type { LoginState } from '@/types/data'
 import { loginAction } from '@/store/actions/login'
 
 import styles from './index.module.scss'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { AxiosError } from 'axios'
 import http from '@/utils/request'
 import { useEffect, useRef, useState } from 'react'
@@ -16,6 +16,7 @@ const Login = () => {
   const [timeLeft, setTimeLeft] = useState(0)
   const timerRef = useRef(-1)
   const mobileRef = useRef<InputRef>(null)
+  const location = useLocation<{ from: string } | undefined>()
 
   // declare the time left to resend veri-code
 
@@ -30,12 +31,12 @@ const Login = () => {
         content: 'successful to login',
         duration: 1000,
         afterClose: () => {
-          history.replace('/home')
+          const path = location.state!.from
+
+          history.replace(path || '/home')
         },
       })
     } catch (error) {
-      console.dir(error)
-
       const err = error as AxiosError<{ message: string }>
       Toast.show({
         icon: 'fail',
@@ -101,12 +102,17 @@ const Login = () => {
 
   return (
     <div className={styles.root}>
-      <NavBar></NavBar>
+      <NavBar onBack={() => history.goBack()}></NavBar>
 
       <div className="login-form">
         <h2 className="title">账号登录</h2>
 
-        <Form validateTrigger={['onChange']} onFinish={onFinish} form={form}>
+        <Form
+          validateTrigger={['onChange']}
+          onFinish={onFinish}
+          form={form}
+          initialValues={{ mobile: '15555555555' }}
+        >
           {/* mobile input */}
           <Form.Item
             name="mobile"
@@ -160,6 +166,7 @@ const Login = () => {
               const hasError =
                 form.getFieldsError().filter((item) => item.errors.length > 0)
                   .length > 0
+
               // if form is not touched, then disable the login button
               const isTouched = !form.isFieldsTouched(true)
               // console.log(hasError,isTouched)

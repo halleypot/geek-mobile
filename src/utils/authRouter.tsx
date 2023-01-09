@@ -1,13 +1,16 @@
-import { Redirect, Route, RouteProps } from 'react-router-dom'
-import { isAuth } from './auth'
+import store from '@/store'
+import { ReactNode } from 'react'
+import { Redirect, Route, RouteProps, useLocation } from 'react-router-dom'
 
 const AuthRouter = ({ children, ...rest }: RouteProps) => {
+  const location = useLocation()
   return (
     <Route
       {...rest}
-      render={(prop) => {
-        if (isAuth) {
-          return <>{children}</>
+      render={() => {
+        const { token } = store.getState().login
+        if (token) {
+          return children as ReactNode
         }
 
         return (
@@ -15,7 +18,7 @@ const AuthRouter = ({ children, ...rest }: RouteProps) => {
             to={{
               pathname: '/login',
               state: {
-                from: prop.location.pathname,
+                from: location.pathname,
               },
             }}
           />
